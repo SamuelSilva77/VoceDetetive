@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento via PIX - Receba Pagamentos Facilmente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00a335;
+            --secondary-color: #0d5218;
+            --accent-color: #6fda44;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .pix-card {
+            animation: pulse 2s infinite alternate;
+            box-shadow: 0 10px 25px rgba(0, 163, 53, 0.1);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+            }
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .qr-code-container {
+            position: relative;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+        
+        .security-badge {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            background: white;
+            padding: 3px 6px;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 0.7rem;
+        }
+        
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+        }
+        
+        .payment-steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .botao_contato a{
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 40px;
+            background-image: linear-gradient(to top left, #16a34a);
+            
+        }
+
+        .botao_contato{
+            color: white;
+            width: 100%;
+            height: 60px;
+            background-image: linear-gradient(to top right, #313d4e, #1f2937);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
+    <!--GOOGLE ADSENSE-->
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+    <!---->
+</head>
+<body>
+
+    <!--GOOGLE ADSENSE-->
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-8489858339408441">
+    </amp-auto-ads>
+    <!---->
+
+
+    <div class="min-h-screen bg-gray-50">
+        <!-- Cabeçalho -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2 hover:opacity-90 transition">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cdb72d1b-edc7-4862-a494-840657a191dc.png" alt="Logo PixPay - Ícone de um cifrão verde dentro de um círculo com bordas arredondadas" class="rounded-full w-10 h-10">
+                    <h1 class="text-3xl font-bold text-green-700">
+                        <span class="text-green-600">PIX</span>
+                        <span class="text-gray-700">Pay</span>
+                    </h1>
+                </a>
+                <nav>
+                    <ul class="flex items-center space-x-6">
+                        <li><a href="#" class="text-gray-700 hover:text-green-600 transition font-medium">Início</a></li>
+                        <li><a href="#" class="text-gray-700 hover:text-green-600 transition font-medium">Sobre</a></li>
+                        <li><a href="#" class="text-gray-700 hover:text-green-600 transition font-medium">Contato</a></li>
+                        <li><a href="#" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all shadow-md font-medium">Área do Cliente</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <main class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Seção de Pagamento -->
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden pix-card">
+                        <div class="bg-green-600 py-4 px-6">
+                            <h2 class="text-xl font-semibold text-white">Pagamento via PIX</h2>
+                        </div>
+                        
+                        <div class="p-6">
+                            <!-- Informações do Pagamento -->
+                            <div class="mb-8">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-600">Valor:</span>
+                                    <span class="text-2xl font-bold text-green-600">R$ 20,00</span>
+                                </div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-600">Destinatário:</span>
+                                    <span class="font-medium">Loja ABC Ltda</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Data:</span>
+                                    <span class="font-medium">15/11/2023</span>
+                                </div>
+                            </div>
+                            
+                            <!-- QR Code PIX -->
+                            <div class="mb-8 flex flex-col items-center">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4">Escaneie o QR Code abaixo</h3>
+                                <div class="qr-code-container">
+                                    <img src="img/qrcode 20.png" class="mx-auto w-32 h-32">
+                                    <div class="security-badge text-xs">
+                                        <i class="fas fa-shield-alt text-green-500 mr-1"></i>
+                                        <span class="text-gray-700">Seguro</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-3">Ou copie o código abaixo</p>
+                            </div>
+                            
+                            <!-- Chave PIX -->
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Chave PIX (EMAIL)</label>
+                                <div class="flex">
+                                    <input type="text" id="pix-key" value="samuelpds77@gmail.com" readonly class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-gray-100">
+                                    <button onclick="copyToClipboard('pix-key')" class="copy-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-r-md transition focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        <i class="fas fa-copy mr-2"></i> Copiar
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Código PIX Copia e Cola -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Código PIX (Copia e Cola)</label>
+                                <div class="flex">
+                                    <textarea id="pix-code" readonly rows="3" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-gray-100">00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-426655440000520400005303986540550.005802BR5909Loja ABC6010Sao Paulo62070503***6304E0A200020126580014BR.GOV.BCB.PIX013619dc19d3-d76c-4c47-8382-f8e69d5f5ee9520400005303986540520.005802BR5921Samuel Paula da Silva6009SAO PAULO621405101fgjboOOpb6304ABC5</textarea>
+                                    <button onclick="copyToClipboard('pix-code')" class="copy-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-r-md transition focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 px-6 py-4">
+                            <p class="text-sm text-gray-600">
+                                <i class="fas fa-info-circle text-green-500 mr-1"></i> Apos o pagamento entre em contato pelo botão abaixo, o mesmo caso não consiga depositar o dinheiro.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção de Informações -->
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="bg-gray-800 py-4 px-6">
+                            <h2 class="text-xl font-semibold text-white">Como pagar com PIX</h2>
+                        </div>
+                        
+                        <div class="p-6">
+                            <ul class="payment-steps">
+                                <li class="mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Abra o aplicativo do seu banco</h3>
+                                    <p class="text-gray-600 mt-1">Acesse a área PIX no app do seu banco ou instituição financeira.</p>
+                                </li>
+                                <li class="mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Escolha "Pagar com PIX"</h3>
+                                    <p class="text-gray-600 mt-1">Selecione a opção de pagamento via QR Code e escaneie o código acima.</p>
+                                </li>
+                                <li class="mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Confira os dados</h3>
+                                    <p class="text-gray-600 mt-1">Verifique se o valor e o destinatário estão corretos antes de confirmar.</p>
+                                </li>
+                                <li>
+                                    <h3 class="text-lg font-medium text-gray-800">Conclusão</h3>
+                                    <p class="text-gray-600 mt-1">Pronto! Você receberá um comprovante e nós seremos notificados automaticamente.</p>
+                                </li>
+                            </ul>
+                            
+                            <hr class="section-divider my-6">
+                            
+                            <div class="mt-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Vantagens do PIX</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-bolt text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Instantâneo</h4>
+                                            <p class="text-sm text-gray-600">Pagamentos confirmados em segundos, 24/7</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-lock text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Seguro</h4>
+                                            <p class="text-sm text-gray-600">Tecnologia protegida pelo Banco Central</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-money-bill-wave text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Sem Taxas</h4>
+                                            <p class="text-sm text-gray-600">Transferências gratuitas para você</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-mobile-alt text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800">Prático</h4>
+                                            <p class="text-sm text-gray-600" style="margin-bottom: 50px;">Pague apenas com o celular em segundos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="botao_contato">
+            
+            <a href="https://wa.me/message/U4A4QSEPJSHXB1"> <img src="img/whatsapp.svg" alt=""> </a>
+
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">PIXPay</h3>
+                        <p class="text-gray-400">A solução mais simples e segura para receber pagamentos via PIX em seu negócio.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Links Úteis</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Central de Ajuda</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Termos de Uso</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-envelope text-gray-400 mr-2"></i>
+                                <span class="text-gray-400">negociostfarq@gmail.com</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-phone-alt text-gray-400 mr-2"></i>
+                                <span class="text-gray-400">(43) 9900-3886</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fab fa-whatsapp text-gray-400 mr-2"></i>
+                                <span class="text-gray-400">(19) 98186-5980</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="border-gray-700 my-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">© 2023 PIXPay. Todos os direitos reservados.</p>
+                    <div class="flex space-x-4 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            // Feedback visual
+            const originalText = elementId === 'pix-key' ? 
+                document.querySelector('#pix-key + button').innerHTML : 
+                document.querySelector('#pix-code + button').innerHTML;
+            
+            if (elementId === 'pix-key') {
+                const btn = document.querySelector('#pix-key + button');
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            } else {
+                const btn = document.querySelector('#pix-code + button');
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }
+        }
+        
+        // Simulação de status de pagamento (para demonstração)
+        function checkPaymentStatus() {
+            // Em um sistema real, isso seria feito via API ao backend
+            setTimeout(() => {
+                // Simula um pagamento após 7 segundos (apenas para demonstração)
+                if (Math.random() > 0.5) {
+                    showPaymentNotification('Pagamento recebido com sucesso!', 'success');
+                } else {
+                    showPaymentNotification('Aguardando confirmação do pagamento...', 'info');
+                }
+            }, 7000);
+        }
+        
+        function showPaymentNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg text-white ${
+                type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${
+                        type === 'success' ? 'fa-check-circle' : 'fa-info-circle'
+                    } mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Inicia a verificação do status (apenas para demonstração)
+        window.addEventListener('load', () => {
+            // checkPaymentStatus();
+        });
+    </script>
+</body>
+</html>
